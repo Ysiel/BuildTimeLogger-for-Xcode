@@ -30,7 +30,7 @@ struct BuildHistoryDatabase {
 
 				// TODO: Old entries in user defaults don't have username, so this stays as not required here.
 				let username = $0[BuildHistoryEntryKey.username.rawValue] as? String ?? "unknown"
-				return BuildHistoryEntry(buildTime: buildTime, schemeName: schemeName, date: Date(timeIntervalSince1970: timestamp), username: username)
+                return BuildHistoryEntry(buildTime: buildTime, schemeName: schemeName, date: Date(timeIntervalSince1970: timestamp), username: username, xcodeVersion: "")
 			}
 
 			return nil

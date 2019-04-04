@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "https://test-decouverte-firebase.firebaseio.com/buildTimeLogs.json"
+            argument = "https://buildtimelogs.firebaseio.com/.json"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

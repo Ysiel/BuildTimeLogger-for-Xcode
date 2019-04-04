@@ -13,6 +13,7 @@ enum BuildHistoryEntryKey: String {
 	case schemeName
 	case timestamp
 	case username
+    case xcodeVersion
 }
 
 struct BuildHistoryEntry: Codable {
@@ -20,13 +21,15 @@ struct BuildHistoryEntry: Codable {
 	let schemeName: String
 	let date: Date
 	let username: String
+    let xcodeVersion: String
 
 	var serialized: [String: Any] {
 		return [
 			BuildHistoryEntryKey.buildTime.rawValue: buildTime,
 			BuildHistoryEntryKey.schemeName.rawValue: schemeName,
 			BuildHistoryEntryKey.timestamp.rawValue: date.timeIntervalSince1970,
-			BuildHistoryEntryKey.username.rawValue: username
+			BuildHistoryEntryKey.username.rawValue: username,
+            BuildHistoryEntryKey.xcodeVersion.rawValue: xcodeVersion
 		]
 	}
 }

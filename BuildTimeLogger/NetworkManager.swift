@@ -19,40 +19,33 @@ final class NetworkManager {
 		self.remoteStorageURL = remoteStorageURL
 	}
 
-	// TODO: use single BuildHistoryEntry object as an argument.
-	func sendData(username: String, timestamp: Int, buildTime: Int, schemeName: String, systemInfo: SystemInfo?) {
-		let semaphore = DispatchSemaphore(value: 0)
+    // TODO: use single BuildHistoryEntry object as an argument.
+    func sendData(username: String, timestamp: Int, buildTime: Int, schemeName: String, xcodeVersion: String) {
+        let semaphore = DispatchSemaphore(value: 0)
 
-		var request = URLRequest(url: remoteStorageURL)
-		request.httpMethod = "POST"
-		var data: [String: Any] = [
-			BuildHistoryEntryKey.username.rawValue: username,
-			BuildHistoryEntryKey.timestamp.rawValue: timestamp,
-			BuildHistoryEntryKey.buildTime.rawValue: buildTime,
-			BuildHistoryEntryKey.schemeName.rawValue: schemeName
-		]
+        var request = URLRequest(url: remoteStorageURL)
+        request.httpMethod = "POST"
 
-		if let systemInfo = systemInfo {
-			data[HardwareInfoKey.cpuType.rawValue] = systemInfo.hardware.cpuType
-			data[HardwareInfoKey.cpuSpeed.rawValue] = systemInfo.hardware.cpuSpeed
-			data[HardwareInfoKey.machineModel.rawValue] = systemInfo.hardware.machineModel
-			data[HardwareInfoKey.physicalMemory.rawValue] = systemInfo.hardware.physicalMemory
-			data[HardwareInfoKey.numberOfProcessors.rawValue] = systemInfo.hardware.numberOfProcessors
-			data[DevToolsInfoKey.devToolsVersion.rawValue] = systemInfo.devTools.version
-		}
+        let data: [String: Any] = [
+            BuildHistoryEntryKey.username.rawValue: username,
+            BuildHistoryEntryKey.timestamp.rawValue: timestamp,
+            BuildHistoryEntryKey.buildTime.rawValue: buildTime,
+            BuildHistoryEntryKey.schemeName.rawValue: schemeName,
+            BuildHistoryEntryKey.xcodeVersion.rawValue: xcodeVersion
+        ]
 
-		let postString = formatPOSTString(data: data)
-		request.httpBody = postString.data(using: .utf8)
-		let task = URLSession.shared.dataTask(with: request) { data, response, error in
-			if let error = error {
-				print("error: \(error)")
-			}
+        let postString = formatPOSTString(data: data)
+        request.httpBody = postString.data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("error: \(error)")
+            }
 
-			semaphore.signal()
-		}
-		task.resume()
-		semaphore.wait();
-	}
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait();
+    }
 
 	func fetchData(completion: @escaping (Result<Data, NetworkError>) -> Void) {
 		let semaphore = DispatchSemaphore(value: 0)
@@ -71,8 +64,11 @@ final class NetworkManager {
 		task.resume()
 		semaphore.wait();
 	}
+}
 
-	private func formatPOSTString(data: [String: Any]) -> String {
+private extension NetworkManager {
+
+	func formatPOSTString(data: [String: Any]) -> String {
 		var resultArr: [String] = []
 
 		for (key, value) in data {

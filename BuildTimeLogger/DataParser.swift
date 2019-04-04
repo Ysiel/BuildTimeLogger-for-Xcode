@@ -72,21 +72,15 @@ private extension DataParser {
 
 	func parse(json: [String: Any]) -> [BuildHistoryEntry] {
 		return json.compactMap({
-			guard let record = $0.value as? [String: String] else {
-				return nil
-			}
+			guard let record = $0.value as? [String: String] else { return nil }
 
-			guard let username = record[BuildHistoryEntryKey.username.rawValue],
-				let timestampStr = record[BuildHistoryEntryKey.timestamp.rawValue],
-				let timestamp = TimeInterval(timestampStr),
-				let buildTimeStr = record[BuildHistoryEntryKey.buildTime.rawValue],
-				let buildTime = Int(buildTimeStr) else {
-				return nil
-			}
+            let schemeName = record[BuildHistoryEntryKey.schemeName.rawValue] ?? ""
+            let username = record[BuildHistoryEntryKey.username.rawValue] ?? ""
+            let timestamp = TimeInterval(record[BuildHistoryEntryKey.timestamp.rawValue] ?? "") ?? 0
+            let buildTime = Int(record[BuildHistoryEntryKey.buildTime.rawValue] ?? "") ?? 0
+            let xcodeVersion = record[BuildHistoryEntryKey.xcodeVersion.rawValue] ?? ""
 
-			// TODO: This needs to stay non required here for now, as it's a newly added param and doesn't exist in older records.
-			let schemeName = record[BuildHistoryEntryKey.schemeName.rawValue] ?? ""
-			return BuildHistoryEntry(buildTime: buildTime, schemeName: schemeName, date: Date(timeIntervalSince1970: timestamp), username: username)
+            return BuildHistoryEntry(buildTime: buildTime, schemeName: schemeName, date: Date(timeIntervalSince1970: timestamp), username: username, xcodeVersion: xcodeVersion)
 		})
 	}
 }
