@@ -1,5 +1,5 @@
 //
-//  DevToolsInfo.swift
+//  SystemInfo.swift
 //  BuildTimeLogger
 //
 //  Created by Marcin Religa on 20/03/2017.
@@ -8,10 +8,11 @@
 
 import Foundation
 
-enum DevToolsInfoKey: String {
-	case devToolsVersion
+struct DevToolsInfo {
+    let version: String
 }
 
-struct DevToolsInfo {
-	let version: String
+struct SystemInfo {
+	let hardware: HardwareInfo
+	let devTools: DevToolsInfo
 }

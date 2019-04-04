@@ -9,6 +9,7 @@
 import Foundation
 
 final class BuildTimeLoggerApp {
+    
 	private let buildHistoryDatabase: BuildHistoryDatabase
 	private let notificationManager: NotificationManager
 	private let dataParser: DataParser

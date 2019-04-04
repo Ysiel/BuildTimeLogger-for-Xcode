@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5FC5F13622560576000D937A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC5F13522560576000D937A /* Array+Utils.swift */; };
+		5FC5F16F22568B05000D937A /* BuildHistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC5F16E22568B05000D937A /* BuildHistoryRepository.swift */; };
 		DA29A7651E808BC10071865D /* HardwareInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29A7641E808BC10071865D /* HardwareInfo.swift */; };
 		DA29A7671E808BDB0071865D /* SystemInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29A7661E808BDB0071865D /* SystemInfoManager.swift */; };
-		DA29A7691E80901E0071865D /* DevToolsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29A7681E80901E0071865D /* DevToolsInfo.swift */; };
 		DA29A76B1E80912F0071865D /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29A76A1E80912F0071865D /* SystemInfo.swift */; };
 		DA362A931E5E076900660B80 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA362A921E5E076900660B80 /* main.swift */; };
 		DA362A9A1E5E07EB00660B80 /* XcodeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA362A991E5E07EB00660B80 /* XcodeDatabase.swift */; };
@@ -45,9 +45,9 @@
 
 /* Begin PBXFileReference section */
 		5FC5F13522560576000D937A /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
+		5FC5F16E22568B05000D937A /* BuildHistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildHistoryRepository.swift; sourceTree = "<group>"; };
 		DA29A7641E808BC10071865D /* HardwareInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardwareInfo.swift; sourceTree = "<group>"; };
 		DA29A7661E808BDB0071865D /* SystemInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfoManager.swift; sourceTree = "<group>"; };
-		DA29A7681E80901E0071865D /* DevToolsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevToolsInfo.swift; sourceTree = "<group>"; };
 		DA29A76A1E80912F0071865D /* SystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		DA362A8F1E5E076900660B80 /* BuildTimeLogger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BuildTimeLogger; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA362A921E5E076900660B80 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -82,6 +82,104 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5FC5F164225688EB000D937A /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				5FC5F16A22568979000D937A /* External Libraries */,
+				DACC7B3E1E70582E00D43CB7 /* TimeFormatter.swift */,
+				5FC5F13522560576000D937A /* Array+Utils.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		5FC5F165225688EF000D937A /* Datalayer */ = {
+			isa = PBXGroup;
+			children = (
+				5FC5F16922568957000D937A /* Implementations */,
+			);
+			path = Datalayer;
+			sourceTree = "<group>";
+		};
+		5FC5F166225688F2000D937A /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				5FC5F16D225689F8000D937A /* Repositories */,
+				5FC5F16822568924000D937A /* Entities */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		5FC5F16722568901000D937A /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DA5B62591E67406E009DC651 /* BuildTimeLoggerApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5FC5F16822568924000D937A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DA5B625D1E6740E5009DC651 /* XcodeDatabase+BuildHistoryEntry.swift */,
+				DA362AA41E5E410300660B80 /* File.swift */,
+				DA5B62571E67402B009DC651 /* BuildHistoryEntry.swift */,
+				DA362A991E5E07EB00660B80 /* XcodeDatabase.swift */,
+				DA29A7641E808BC10071865D /* HardwareInfo.swift */,
+				DA29A76A1E80912F0071865D /* SystemInfo.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		5FC5F16922568957000D937A /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				DA362AA01E5E403600660B80 /* DerivedDataManager.swift */,
+				DA362AA21E5E40DB00660B80 /* UserSettings.swift */,
+				DA5B625B1E67409A009DC651 /* BuildHistoryDatabase.swift */,
+				DAD7141C1E6F207200F71993 /* NetworkManager.swift */,
+				DACC7AE21E70289000D43CB7 /* NotificationManager.swift */,
+				DACC7B3B1E70571A00D43CB7 /* DataParser.swift */,
+				DACC7B401E705A9400D43CB7 /* XcodeDatabaseManager.swift */,
+				DA29A7661E808BDB0071865D /* SystemInfoManager.swift */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		5FC5F16A22568979000D937A /* External Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				5FC5F16C22568993000D937A /* GZIP */,
+				5FC5F16B22568991000D937A /* ResultType */,
+			);
+			path = "External Libraries";
+			sourceTree = "<group>";
+		};
+		5FC5F16B22568991000D937A /* ResultType */ = {
+			isa = PBXGroup;
+			children = (
+				DACC7B371E70538D00D43CB7 /* Result.swift */,
+				DACC7B381E70538D00D43CB7 /* ResultProtocol.swift */,
+			);
+			path = ResultType;
+			sourceTree = "<group>";
+		};
+		5FC5F16C22568993000D937A /* GZIP */ = {
+			isa = PBXGroup;
+			children = (
+				DA362A9D1E5E08B400660B80 /* NSData+GZIP.h */,
+				DA362A9E1E5E08B400660B80 /* NSData+GZIP.m */,
+			);
+			path = GZIP;
+			sourceTree = "<group>";
+		};
+		5FC5F16D225689F8000D937A /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				5FC5F16E22568B05000D937A /* BuildHistoryRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		DA362A861E5E076900660B80 = {
 			isa = PBXGroup;
 			children = (
@@ -101,80 +199,14 @@
 		DA362A911E5E076900660B80 /* BuildTimeLogger */ = {
 			isa = PBXGroup;
 			children = (
-				DACC7B3D1E70582400D43CB7 /* Helpers */,
-				DACC7B331E70535900D43CB7 /* Libraries */,
-				DA5B625F1E674121009DC651 /* Managers */,
-				DA5B62561E67400F009DC651 /* Models */,
+				5FC5F16722568901000D937A /* Application */,
+				5FC5F166225688F2000D937A /* Business */,
+				5FC5F165225688EF000D937A /* Datalayer */,
+				5FC5F164225688EB000D937A /* Reusable */,
 				DA362A921E5E076900660B80 /* main.swift */,
 				DA362A9B1E5E089600660B80 /* BuildTimeLogger-Bridging-Header.h */,
-				DA5B62591E67406E009DC651 /* BuildTimeLoggerApp.swift */,
-				DA5B625D1E6740E5009DC651 /* XcodeDatabase+BuildHistoryEntry.swift */,
 			);
 			path = BuildTimeLogger;
-			sourceTree = "<group>";
-		};
-		DA5B62551E673FC1009DC651 /* GZIP */ = {
-			isa = PBXGroup;
-			children = (
-				DA362A9D1E5E08B400660B80 /* NSData+GZIP.h */,
-				DA362A9E1E5E08B400660B80 /* NSData+GZIP.m */,
-			);
-			name = GZIP;
-			sourceTree = "<group>";
-		};
-		DA5B62561E67400F009DC651 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				DA362AA41E5E410300660B80 /* File.swift */,
-				DA5B62571E67402B009DC651 /* BuildHistoryEntry.swift */,
-				DA362A991E5E07EB00660B80 /* XcodeDatabase.swift */,
-				DA29A7641E808BC10071865D /* HardwareInfo.swift */,
-				DA29A7681E80901E0071865D /* DevToolsInfo.swift */,
-				DA29A76A1E80912F0071865D /* SystemInfo.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		DA5B625F1E674121009DC651 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				DA362AA01E5E403600660B80 /* DerivedDataManager.swift */,
-				DA362AA21E5E40DB00660B80 /* UserSettings.swift */,
-				DA5B625B1E67409A009DC651 /* BuildHistoryDatabase.swift */,
-				DAD7141C1E6F207200F71993 /* NetworkManager.swift */,
-				DACC7AE21E70289000D43CB7 /* NotificationManager.swift */,
-				DACC7B3B1E70571A00D43CB7 /* DataParser.swift */,
-				DACC7B401E705A9400D43CB7 /* XcodeDatabaseManager.swift */,
-				DA29A7661E808BDB0071865D /* SystemInfoManager.swift */,
-			);
-			name = Managers;
-			sourceTree = "<group>";
-		};
-		DACC7B331E70535900D43CB7 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				DACC7B361E70537200D43CB7 /* ResultType */,
-				DA5B62551E673FC1009DC651 /* GZIP */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
-		DACC7B361E70537200D43CB7 /* ResultType */ = {
-			isa = PBXGroup;
-			children = (
-				DACC7B371E70538D00D43CB7 /* Result.swift */,
-				DACC7B381E70538D00D43CB7 /* ResultProtocol.swift */,
-			);
-			name = ResultType;
-			sourceTree = "<group>";
-		};
-		DACC7B3D1E70582400D43CB7 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				DACC7B3E1E70582E00D43CB7 /* TimeFormatter.swift */,
-				5FC5F13522560576000D937A /* Array+Utils.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,7 +273,6 @@
 				DACC7B3F1E70582E00D43CB7 /* TimeFormatter.swift in Sources */,
 				DACC7B391E70538D00D43CB7 /* Result.swift in Sources */,
 				DA5B62581E67402B009DC651 /* BuildHistoryEntry.swift in Sources */,
-				DA29A7691E80901E0071865D /* DevToolsInfo.swift in Sources */,
 				DA362AA51E5E410300660B80 /* File.swift in Sources */,
 				DACC7B3A1E70538D00D43CB7 /* ResultProtocol.swift in Sources */,
 				DA5B625A1E67406E009DC651 /* BuildTimeLoggerApp.swift in Sources */,
@@ -256,6 +287,7 @@
 				DACC7B3C1E70571A00D43CB7 /* DataParser.swift in Sources */,
 				DA29A7671E808BDB0071865D /* SystemInfoManager.swift in Sources */,
 				DA362AA31E5E40DB00660B80 /* UserSettings.swift in Sources */,
+				5FC5F16F22568B05000D937A /* BuildHistoryRepository.swift in Sources */,
 				DA362AA11E5E403700660B80 /* DerivedDataManager.swift in Sources */,
 				DA5B625E1E6740E5009DC651 /* XcodeDatabase+BuildHistoryEntry.swift in Sources */,
 			);
