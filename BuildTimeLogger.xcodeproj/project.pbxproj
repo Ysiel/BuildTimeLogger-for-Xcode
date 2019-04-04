@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5FC5F13622560576000D937A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC5F13522560576000D937A /* Array+Utils.swift */; };
 		DA29A7651E808BC10071865D /* HardwareInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29A7641E808BC10071865D /* HardwareInfo.swift */; };
 		DA29A7671E808BDB0071865D /* SystemInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29A7661E808BDB0071865D /* SystemInfoManager.swift */; };
 		DA29A7691E80901E0071865D /* DevToolsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29A7681E80901E0071865D /* DevToolsInfo.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5FC5F13522560576000D937A /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		DA29A7641E808BC10071865D /* HardwareInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardwareInfo.swift; sourceTree = "<group>"; };
 		DA29A7661E808BDB0071865D /* SystemInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfoManager.swift; sourceTree = "<group>"; };
 		DA29A7681E80901E0071865D /* DevToolsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevToolsInfo.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				DACC7B3E1E70582E00D43CB7 /* TimeFormatter.swift */,
+				5FC5F13522560576000D937A /* Array+Utils.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				DA362AA51E5E410300660B80 /* File.swift in Sources */,
 				DACC7B3A1E70538D00D43CB7 /* ResultProtocol.swift in Sources */,
 				DA5B625A1E67406E009DC651 /* BuildTimeLoggerApp.swift in Sources */,
+				5FC5F13622560576000D937A /* Array+Utils.swift in Sources */,
 				DAD7141D1E6F207200F71993 /* NetworkManager.swift in Sources */,
 				DA29A76B1E80912F0071865D /* SystemInfo.swift in Sources */,
 				DA5B625C1E67409A009DC651 /* BuildHistoryDatabase.swift in Sources */,

@@ -9,25 +9,35 @@
 import Foundation
 
 struct DataParser {
-	func parse(data: Data) {
+
+    func parseDetails(data: Data) {
+        guard let responseJSON = parseResponse(data: data) else {
+            return
+        }
+
+        let buildHistory = parse(json: responseJSON).jsonString
+        print(buildHistory)
+
+    }
+
+    func parseSummary(data: Data) {
 		guard let responseJSON = parseResponse(data: data) else {
 			return
 		}
 
 		let buildHistory = parse(json: responseJSON)
 
-		let allUsernames = Set(buildHistory.flatMap({ $0.username }))
+		let allUsernames = Set(buildHistory.map({ $0.username }))
 
 		for username in allUsernames {
-			let entries = buildHistory.filter({ $0.username == String(username) })
 
-			let buildTimeTotalToday = totalBuildTime(for: buildEntriesFromToday(in: entries))
-			let buildTimeTotal = totalBuildTime(for: entries)
+			let buildTimeTotalFormatted = TimeFormatter.format(
+                time: totalBuildTime(
+                    for: buildHistory.filter({ $0.username == String(username) })
+                )
+            )
 
-			let buildTimeTotalTodayFormatted = TimeFormatter.format(time: buildTimeTotalToday)
-			let buildTimeTotalFormatted = TimeFormatter.format(time: buildTimeTotal)
-
-			print("username: \(username)\nbuild time today: \(buildTimeTotalTodayFormatted)\ntotal build time: \(buildTimeTotalFormatted)\n")
+			print("username: \(username)\ntotal build time: \(buildTimeTotalFormatted)\n")
 		}
 	}
 
@@ -42,8 +52,11 @@ struct DataParser {
 			return $0 + $1.buildTime
 		})
 	}
+}
 
-	private func parseResponse(data: Data) -> [String: Any]? {
+private extension DataParser {
+
+	func parseResponse(data: Data) -> [String: Any]? {
 		do {
 			let json = try JSONSerialization.jsonObject(with: data, options: [])
 
@@ -57,7 +70,7 @@ struct DataParser {
 		return nil
 	}
 
-	private func parse(json: [String: Any]) -> [BuildHistoryEntry] {
+	func parse(json: [String: Any]) -> [BuildHistoryEntry] {
 		return json.compactMap({
 			guard let record = $0.value as? [String: String] else {
 				return nil

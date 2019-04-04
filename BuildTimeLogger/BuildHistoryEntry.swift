@@ -15,7 +15,7 @@ enum BuildHistoryEntryKey: String {
 	case username
 }
 
-struct BuildHistoryEntry {
+struct BuildHistoryEntry: Codable {
 	let buildTime: Int
 	let schemeName: String
 	let date: Date

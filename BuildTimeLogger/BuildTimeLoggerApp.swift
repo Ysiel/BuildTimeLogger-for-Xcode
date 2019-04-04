@@ -61,7 +61,7 @@ final class BuildTimeLoggerApp {
 		networkManager.fetchData { [weak self] result in
 			switch result {
 			case .success(let data):
-				self?.dataParser.parse(data: data)
+				self?.dataParser.parseDetails(data: data)
 			case .failure:
 				print("error")
 			}
