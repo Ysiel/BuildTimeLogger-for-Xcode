@@ -96,14 +96,16 @@ final class BuildTimeLoggerApp {
 			return
 		}
 
-		let updatedBuildHistoryData: [BuildHistoryEntry]
+        let updatedBuildHistoryData: [BuildHistoryEntry] = {
 
-		if var buildHistoryData = buildHistoryDatabase.read() {
-			buildHistoryData.append(latestBuildData.buildHistoryEntry)
-			updatedBuildHistoryData = buildHistoryData
-		} else {
-			updatedBuildHistoryData = [latestBuildData.buildHistoryEntry]
-		}
+            guard var buildHistoryData = buildHistoryDatabase.read() else {
+                return [latestBuildData.buildHistoryEntry]
+            }
+
+            buildHistoryData.append(latestBuildData.buildHistoryEntry)
+
+            return buildHistoryData.filter({ Calendar.current.isDateInToday($0.date) })
+        }()
 
 		buildHistoryDatabase.save(history: updatedBuildHistoryData)
 		buildHistory = updatedBuildHistoryData
