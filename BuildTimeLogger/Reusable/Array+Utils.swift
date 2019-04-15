@@ -19,9 +19,9 @@ public extension Array where Element:Encodable {
 
     /// Pretty printed string output when an array can be converted into a valid JSON. Is equals to "not a valid JSON" string otherwise.
     /// - Note: This method is created for debug purpose, we don't advise you to use it in another context :)
-    var jsonString: String {
+    func jsonString(encoder: JSONEncoder = JSONEncoder()) -> String {
 
-        guard let data = try? JSONEncoder().encode(self),
+        guard let data = try? encoder.encode(self),
             let dictionaries = (try? JSONSerialization.jsonObject(with: data)) as? [[String:Any]],
             let jsonData = try? JSONSerialization.data(withJSONObject: dictionaries, options: .prettyPrinted),
             let outputString = String(bytes: jsonData, encoding: String.Encoding.utf8) else {

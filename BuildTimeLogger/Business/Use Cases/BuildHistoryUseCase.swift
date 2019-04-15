@@ -39,7 +39,7 @@ class BuildHistoryUseCase {
         }
         // Calculate intermediate values
         let totalTime = entries.reduce(0) { $0 + $1.buildTime }
-        let mostRecentEntry = entries.max(by: { $0.date > $1.date })
+        let mostRecentEntry = entries.max(by: { $0.date < $1.date })
         let numberOfBuildsToday = entries.count
 
         return String(
@@ -61,7 +61,10 @@ class BuildHistoryUseCase {
         return remoteApi.retrieveAllEntries { result in
             switch result {
             case .success(let entries):
-                success(entries.jsonString)
+                let encoder = JSONEncoder()
+                encoder.dateEncodingStrategy = .formatted(DateFormatter.ddMMyyyy_HHmmss_slashed)
+
+                success(entries.jsonString(encoder: encoder))
             case .failure(let error):
                 failure(error)
             }

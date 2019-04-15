@@ -13,6 +13,7 @@
 		5FC5F13622560576000D937A /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC5F13522560576000D937A /* Array+Utils.swift */; };
 		5FC5F17222568CE6000D937A /* BuildHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC5F17122568CE6000D937A /* BuildHistoryUseCase.swift */; };
 		5FC94AE4226248F8008D86C2 /* BuildHistoryDatasources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC94AE3226248F8008D86C2 /* BuildHistoryDatasources.swift */; };
+		5FD0DE7B226450C500F537EE /* DateFormatter+Customs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD0DE7A226450C500F537EE /* DateFormatter+Customs.swift */; };
 		DA362A931E5E076900660B80 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA362A921E5E076900660B80 /* main.swift */; };
 		DA362A9F1E5E08B400660B80 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = DA362A9E1E5E08B400660B80 /* NSData+GZIP.m */; };
 		DA5B62581E67402B009DC651 /* BuildHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5B62571E67402B009DC651 /* BuildHistoryEntry.swift */; };
@@ -42,6 +43,7 @@
 		5FC5F13522560576000D937A /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		5FC5F17122568CE6000D937A /* BuildHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildHistoryUseCase.swift; sourceTree = "<group>"; };
 		5FC94AE3226248F8008D86C2 /* BuildHistoryDatasources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildHistoryDatasources.swift; sourceTree = "<group>"; };
+		5FD0DE7A226450C500F537EE /* DateFormatter+Customs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Customs.swift"; sourceTree = "<group>"; };
 		DA362A8F1E5E076900660B80 /* BuildTimeLogger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BuildTimeLogger; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA362A921E5E076900660B80 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DA362A9B1E5E089600660B80 /* BuildTimeLogger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BuildTimeLogger-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				5FC5F16A22568979000D937A /* External Libraries */,
 				DACC7B3E1E70582E00D43CB7 /* TimeFormatter.swift */,
 				5FC5F13522560576000D937A /* Array+Utils.swift */,
+				5FD0DE7A226450C500F537EE /* DateFormatter+Customs.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				DA362A931E5E076900660B80 /* main.swift in Sources */,
 				5FC5F17222568CE6000D937A /* BuildHistoryUseCase.swift in Sources */,
 				5FC2A6E4225A382F00B8033D /* UserDefaultBuildHistoryLocalStore.swift in Sources */,
+				5FD0DE7B226450C500F537EE /* DateFormatter+Customs.swift in Sources */,
 				5FC94AE4226248F8008D86C2 /* BuildHistoryDatasources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

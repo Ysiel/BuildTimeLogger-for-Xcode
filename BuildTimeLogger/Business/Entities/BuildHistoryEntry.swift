@@ -13,5 +13,4 @@ struct BuildHistoryEntry: Codable {
 	let schemeName: String
 	let date: Date
 	let username: String
-    let xcodeVersion: String
 }

@@ -11,7 +11,9 @@ import Foundation
 private extension BuildHistoryEntry {
 
     func encodeToJsonData() -> Data? {
-        return try? JSONEncoder().encode(self)
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .formatted(DateFormatter.yyyyMMddHHmmss_timezoned_dashed)
+        return try? encoder.encode(self)
     }
 }
 
@@ -69,7 +71,9 @@ extension FireBaseRestBuildHistoryRemoteApi: BuildHistoryRemoteAPI {
             }
 
             do {
-                let entries = Array((try JSONDecoder().decode([String: BuildHistoryEntry].self, from: data)).values)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMddHHmmss_timezoned_dashed)
+                let entries = Array((try decoder.decode([String: BuildHistoryEntry].self, from: data)).values)
                     completion(.success(entries))
             } catch {
                 print(error)

@@ -113,8 +113,7 @@ private struct XcodeDatabase {
             buildTime: buildTime,
             schemeName: schemeName,
             date: Date(),
-            username: NSUserName(),
-            xcodeVersion: ""
+            username: NSUserName()
         )
     }
 
