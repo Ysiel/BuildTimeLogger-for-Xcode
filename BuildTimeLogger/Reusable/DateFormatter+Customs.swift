@@ -10,21 +10,29 @@ import Foundation
 
 
 extension DateFormatter {
+
+    static let ddMMyyyy_slashed: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+
+        return formatter
+    }()
+
+    static let HHmmss_colon: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        return formatter
+    }()
+
     static let ddMMyyyy_HHmmss_slashed: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-//        formatter.calendar = Calendar(identifier: .iso8601)
-//        formatter.timeZone = /*TimeZone.autoupdatingCurrent*/  TimeZone(secondsFromGMT: -120)
-//        formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }()
 
     static let yyyyMMddHHmmss_timezoned_dashed: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        //        formatter.calendar = Calendar(identifier: .iso8601)
-        //        formatter.timeZone = /*TimeZone.autoupdatingCurrent*/  TimeZone(secondsFromGMT: -120)
-        //        formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }()
 }

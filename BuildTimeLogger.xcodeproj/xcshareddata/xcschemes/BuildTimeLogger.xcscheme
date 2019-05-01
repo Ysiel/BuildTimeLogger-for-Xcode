@@ -63,12 +63,12 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "https://buildtimelogs.firebaseio.com/.json"
-            isEnabled = "NO">
+            argument = "https://test-decouverte-firebase.firebaseio.com/.json"
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "fetch"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

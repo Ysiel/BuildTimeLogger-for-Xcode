@@ -8,9 +8,29 @@
 
 import Foundation
 
-// UC 1 : notif only (aka save local)
-// UC 2 : notif + saveRemote
-// UC 3: fetch remote
+private struct BuildHistoryEntryViewModel {
+    let buildTime: Int
+    let schemeName: String
+    let date: String
+    let time: String
+    let username: String
+    let hostname: String
+}
+
+extension BuildHistoryEntryViewModel: Codable { }
+
+private extension BuildHistoryEntryViewModel {
+    static func create(from buildHistoryEntry: BuildHistoryEntry) -> BuildHistoryEntryViewModel {
+        return BuildHistoryEntryViewModel(
+            buildTime: buildHistoryEntry.buildTime,
+            schemeName: buildHistoryEntry.schemeName,
+            date: DateFormatter.ddMMyyyy_slashed.string(from: buildHistoryEntry.date),
+            time: DateFormatter.HHmmss_colon.string(from: buildHistoryEntry.date),
+            username: buildHistoryEntry.username,
+            hostname: buildHistoryEntry.hostname
+        )
+    }
+}
 
 class BuildHistoryUseCase {
 
@@ -61,10 +81,7 @@ class BuildHistoryUseCase {
         return remoteApi.retrieveAllEntries { result in
             switch result {
             case .success(let entries):
-                let encoder = JSONEncoder()
-                encoder.dateEncodingStrategy = .formatted(DateFormatter.ddMMyyyy_HHmmss_slashed)
-
-                success(entries.jsonString(encoder: encoder))
+                success(entries.map { BuildHistoryEntryViewModel.create(from: $0) }.jsonString(encoder: JSONEncoder()))
             case .failure(let error):
                 failure(error)
             }

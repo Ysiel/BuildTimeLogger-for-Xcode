@@ -8,15 +8,43 @@
 
 import Foundation
 
-private extension BuildHistoryEntry {
+struct BuildHistoryEntryAPIEntity {
+    let buildTime: Int?
+    let schemeName: String?
+    let date: Date?
+    let username: String?
+    let hostname: String?
+}
+
+extension BuildHistoryEntryAPIEntity: Codable { }
+
+private extension BuildHistoryEntryAPIEntity {
 
     func encodeToJsonData() -> Data? {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .formatted(DateFormatter.yyyyMMddHHmmss_timezoned_dashed)
         return try? encoder.encode(self)
     }
-}
 
+    static func create(from buildHistoryEntry: BuildHistoryEntry) -> BuildHistoryEntryAPIEntity {
+        return BuildHistoryEntryAPIEntity(
+            buildTime: buildHistoryEntry.buildTime,
+            schemeName: buildHistoryEntry.schemeName,
+            date: buildHistoryEntry.date,
+            username: buildHistoryEntry.username,
+            hostname: buildHistoryEntry.hostname)
+    }
+
+    func createBuildHistoryEntryEntity() -> BuildHistoryEntry? {
+        return BuildHistoryEntry(
+            buildTime: self.buildTime,
+            schemeName: self.schemeName,
+            date: self.date,
+            username: self.username,
+            hostname: self.hostname
+        )
+    }
+}
 
 class FireBaseRestBuildHistoryRemoteApi {
 
@@ -30,7 +58,7 @@ class FireBaseRestBuildHistoryRemoteApi {
 extension FireBaseRestBuildHistoryRemoteApi: BuildHistoryRemoteAPI {
     func save(_ entry: BuildHistoryEntry) {
 
-        guard let data = entry.encodeToJsonData() else {
+        guard let data = BuildHistoryEntryAPIEntity.create(from: entry).encodeToJsonData() else {
             print("can't encode data to JSON")
             return
         }   //TODO: boaf
@@ -73,8 +101,8 @@ extension FireBaseRestBuildHistoryRemoteApi: BuildHistoryRemoteAPI {
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMddHHmmss_timezoned_dashed)
-                let entries = Array((try decoder.decode([String: BuildHistoryEntry].self, from: data)).values)
-                    completion(.success(entries))
+                let entries = Array((try decoder.decode([String: BuildHistoryEntryAPIEntity].self, from: data)).values)
+                completion(.success(entries.compactMap { $0.createBuildHistoryEntryEntity() }))
             } catch {
                 print(error)
                 completion(.failure(NetworkError.didFailToFetchData))

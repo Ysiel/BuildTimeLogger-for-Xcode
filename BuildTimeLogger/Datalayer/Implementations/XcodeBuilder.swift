@@ -85,6 +85,9 @@ private struct XcodeDatabase {
     let timeStoppedRecording: Int
     let logUrl: URL
     let buildTime: Int
+    let buildDate = Date()
+    let username = NSUserName()
+    let hostname = Host.current().localizedName ?? ""
 
     init?(fromPath path: String) {
         guard let data = NSDictionary(contentsOfFile: path)?["logs"] as? [String: AnyObject],
@@ -107,13 +110,17 @@ private struct XcodeDatabase {
         logUrl = URL(fileURLWithPath: path).deletingLastPathComponent().appendingPathComponent("\(key).xcactivitylog")
         buildTime = self.timeStoppedRecording - self.timeStartedRecording
     }
+}
 
-    func createBuildHistoryEntry() -> BuildHistoryEntry {
+private extension XcodeDatabase {
+
+    func createBuildHistoryEntry() -> BuildHistoryEntry? {
         return BuildHistoryEntry(
             buildTime: buildTime,
             schemeName: schemeName,
-            date: Date(),
-            username: NSUserName()
+            date: buildDate,
+            username: username,
+            hostname: hostname
         )
     }
 
@@ -127,7 +134,6 @@ private struct XcodeDatabase {
         }
         return sortedKeys.sorted{ $0.0 < $1.0 }
     }
-
 }
 
 extension XcodeDatabase : Equatable {}
