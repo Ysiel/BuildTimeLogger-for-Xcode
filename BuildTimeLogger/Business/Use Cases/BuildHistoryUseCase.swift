@@ -8,46 +8,27 @@
 
 import Foundation
 
-private struct BuildHistoryEntryViewModel {
-    let buildTime: Int
-    let schemeName: String
-    let date: String
-    let time: String
-    let username: String
-    let hostname: String
-}
-
-extension BuildHistoryEntryViewModel: Codable { }
-
-private extension BuildHistoryEntryViewModel {
-    static func create(from buildHistoryEntry: BuildHistoryEntry) -> BuildHistoryEntryViewModel {
-        return BuildHistoryEntryViewModel(
-            buildTime: buildHistoryEntry.buildTime,
-            schemeName: buildHistoryEntry.schemeName,
-            date: DateFormatter.ddMMyyyy_slashed.string(from: buildHistoryEntry.date),
-            time: DateFormatter.HHmmss_colon.string(from: buildHistoryEntry.date),
-            username: buildHistoryEntry.username,
-            hostname: buildHistoryEntry.hostname
-        )
-    }
-}
-
 class BuildHistoryUseCase {
 
     private let builder: BuildTool
-    private let remoteApi: BuildHistoryRemoteAPI
+    private let makeRemoteApi: ((String) -> BuildHistoryRemoteAPI)
     private let dataStore: BuildHistoryLocalStore
 
-    init(dataStore: BuildHistoryLocalStore, remoteApi: BuildHistoryRemoteAPI, builder: BuildTool) {
+    init(makeRemoteApi: @escaping ((String) -> BuildHistoryRemoteAPI), dataStore: BuildHistoryLocalStore, builder: BuildTool) {
         self.dataStore = dataStore
-        self.remoteApi = remoteApi
+        self.makeRemoteApi = makeRemoteApi
         self.builder = builder
     }
 
-    func saveLastBuildHistoryEntry() -> BuildHistoryEntry? {
-        guard let lastEntry = builder.retrieveLastBuildHistoryEntry() else { return nil }   // TODO: boaf
-        dataStore.save(entry: lastEntry)
-        return lastEntry
+    func saveNewBuildHistoryEntries(for scheme: String) -> [BuildHistoryEntry]? {
+        // retrieve entries from builder tool
+        let entries = builder.retrieveBuildHistoryEntries(for: scheme)
+        // determine new entries regarding stored data
+        let newEntries = Array(Set(entries).subtracting(dataStore.retrieveAllEntries()))
+        // add new data to store
+        dataStore.save(entries: newEntries)
+        //return them
+        return newEntries
     }
 
     func buildNotificationMessage() -> String {
@@ -71,17 +52,30 @@ class BuildHistoryUseCase {
         )
     }
 
-    func SaveRemotely(entry: BuildHistoryEntry) {
+    func SaveRemotely(entries: [BuildHistoryEntry], to url: String) {
         // send entry to REMOTE for saving
-        remoteApi.save(entry)
+        makeRemoteApi(url).save(entries)
     }
 
-    func retrieveAllEntries(success: @escaping (String) -> Void, failure: @escaping (Error) -> Void) {
+    func retrieveAllEntries(from url: String, format: OutputFormat, success: @escaping (String) -> Void, failure: @escaping (Error) -> Void) {
         // retrieve all entries from REMOTE
-        return remoteApi.retrieveAllEntries { result in
+        return makeRemoteApi(url).retrieveAllEntries { result in
             switch result {
             case .success(let entries):
-                success(entries.map { BuildHistoryEntryViewModel.create(from: $0) }.jsonString(encoder: JSONEncoder()))
+                let formattedString: String = {
+                    switch format {
+                    case .json:
+                        return entries
+                            .map { BuildHistoryEntryViewModel.create(from: $0) }
+                            .jsonString(encoder: JSONEncoder())
+                    case .csv:
+                        return entries
+                            .map { BuildHistoryEntryViewModel.create(from: $0) }
+                            .toCSVString()
+                    }
+                }()
+
+                success(formattedString)
             case .failure(let error):
                 failure(error)
             }

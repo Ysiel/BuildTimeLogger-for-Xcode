@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F9AAE8722BF56FD00548E9B /* XcodeLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9AAE8622BF56FD00548E9B /* XcodeLog.swift */; };
+		5F9AAE8922BF570F00548E9B /* LogStoreManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9AAE8822BF570F00548E9B /* LogStoreManifest.swift */; };
+		5FA0E6E722BFB3B20093677D /* BuildHistoryEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA0E6E622BFB3B20093677D /* BuildHistoryEntryViewModel.swift */; };
+		5FB21D182295D94300613E84 /* BuildHistoryEntryAPIEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB21D172295D94300613E84 /* BuildHistoryEntryAPIEntity.swift */; };
+		5FB3BDA722913799009656C3 /* CommandLineAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB3BDA622913799009656C3 /* CommandLineAnalyzer.swift */; };
 		5FC2A6E4225A382F00B8033D /* UserDefaultBuildHistoryLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2A6E3225A382F00B8033D /* UserDefaultBuildHistoryLocalStore.swift */; };
 		5FC2A6E6225A52B100B8033D /* FireBaseRestBuildHistoryRemoteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2A6E5225A52B100B8033D /* FireBaseRestBuildHistoryRemoteApi.swift */; };
 		5FC2A6E8225A5A0D00B8033D /* XcodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC2A6E7225A5A0D00B8033D /* XcodeBuilder.swift */; };
@@ -37,6 +42,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5F9AAE8622BF56FD00548E9B /* XcodeLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeLog.swift; sourceTree = "<group>"; };
+		5F9AAE8822BF570F00548E9B /* LogStoreManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStoreManifest.swift; sourceTree = "<group>"; };
+		5FA0E6E622BFB3B20093677D /* BuildHistoryEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildHistoryEntryViewModel.swift; sourceTree = "<group>"; };
+		5FB21D172295D94300613E84 /* BuildHistoryEntryAPIEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildHistoryEntryAPIEntity.swift; sourceTree = "<group>"; };
+		5FB3BDA622913799009656C3 /* CommandLineAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineAnalyzer.swift; sourceTree = "<group>"; };
 		5FC2A6E3225A382F00B8033D /* UserDefaultBuildHistoryLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultBuildHistoryLocalStore.swift; sourceTree = "<group>"; };
 		5FC2A6E5225A52B100B8033D /* FireBaseRestBuildHistoryRemoteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRestBuildHistoryRemoteApi.swift; sourceTree = "<group>"; };
 		5FC2A6E7225A5A0D00B8033D /* XcodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeBuilder.swift; sourceTree = "<group>"; };
@@ -68,6 +78,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F9AAE8522BF56CD00548E9B /* Xcode */ = {
+			isa = PBXGroup;
+			children = (
+				5FC2A6E7225A5A0D00B8033D /* XcodeBuilder.swift */,
+				5F9AAE8622BF56FD00548E9B /* XcodeLog.swift */,
+				5F9AAE8822BF570F00548E9B /* LogStoreManifest.swift */,
+			);
+			path = Xcode;
+			sourceTree = "<group>";
+		};
+		5FB21D192295D98600613E84 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				5FC2A6E5225A52B100B8033D /* FireBaseRestBuildHistoryRemoteApi.swift */,
+				5FB21D172295D94300613E84 /* BuildHistoryEntryAPIEntity.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		5FC5F164225688EB000D937A /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +131,7 @@
 			children = (
 				DA5B62591E67406E009DC651 /* BuildTimeLoggerApp.swift */,
 				DACC7AE21E70289000D43CB7 /* NotificationManager.swift */,
+				5FB3BDA622913799009656C3 /* CommandLineAnalyzer.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -117,9 +147,9 @@
 		5FC5F16922568957000D937A /* Implementations */ = {
 			isa = PBXGroup;
 			children = (
+				5F9AAE8522BF56CD00548E9B /* Xcode */,
+				5FB21D192295D98600613E84 /* Firebase */,
 				5FC2A6E3225A382F00B8033D /* UserDefaultBuildHistoryLocalStore.swift */,
-				5FC2A6E5225A52B100B8033D /* FireBaseRestBuildHistoryRemoteApi.swift */,
-				5FC2A6E7225A5A0D00B8033D /* XcodeBuilder.swift */,
 			);
 			path = Implementations;
 			sourceTree = "<group>";
@@ -155,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				5FC5F17122568CE6000D937A /* BuildHistoryUseCase.swift */,
+				5FA0E6E622BFB3B20093677D /* BuildHistoryEntryViewModel.swift */,
 			);
 			path = "Use Cases";
 			sourceTree = "<group>";
@@ -187,11 +218,11 @@
 			isa = PBXGroup;
 			children = (
 				5FC94AE5226249B9008D86C2 /* Supporting Files */,
+				DA362A921E5E076900660B80 /* main.swift */,
 				5FC5F16722568901000D937A /* Application */,
 				5FC5F166225688F2000D937A /* Business */,
 				5FC5F165225688EF000D937A /* Datalayer */,
 				5FC5F164225688EB000D937A /* Reusable */,
-				DA362A921E5E076900660B80 /* main.swift */,
 			);
 			path = BuildTimeLogger;
 			sourceTree = "<group>";
@@ -256,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DACC7B3F1E70582E00D43CB7 /* TimeFormatter.swift in Sources */,
+				5FB3BDA722913799009656C3 /* CommandLineAnalyzer.swift in Sources */,
 				DACC7B391E70538D00D43CB7 /* Result.swift in Sources */,
 				DA5B62581E67402B009DC651 /* BuildHistoryEntry.swift in Sources */,
 				DACC7B3A1E70538D00D43CB7 /* ResultProtocol.swift in Sources */,
@@ -264,11 +296,15 @@
 				5FC2A6E6225A52B100B8033D /* FireBaseRestBuildHistoryRemoteApi.swift in Sources */,
 				5FC2A6E8225A5A0D00B8033D /* XcodeBuilder.swift in Sources */,
 				DACC7AE31E70289000D43CB7 /* NotificationManager.swift in Sources */,
+				5F9AAE8722BF56FD00548E9B /* XcodeLog.swift in Sources */,
+				5FB21D182295D94300613E84 /* BuildHistoryEntryAPIEntity.swift in Sources */,
 				DA362A9F1E5E08B400660B80 /* NSData+GZIP.m in Sources */,
 				DA362A931E5E076900660B80 /* main.swift in Sources */,
 				5FC5F17222568CE6000D937A /* BuildHistoryUseCase.swift in Sources */,
 				5FC2A6E4225A382F00B8033D /* UserDefaultBuildHistoryLocalStore.swift in Sources */,
+				5F9AAE8922BF570F00548E9B /* LogStoreManifest.swift in Sources */,
 				5FD0DE7B226450C500F537EE /* DateFormatter+Customs.swift in Sources */,
+				5FA0E6E722BFB3B20093677D /* BuildHistoryEntryViewModel.swift in Sources */,
 				5FC94AE4226248F8008D86C2 /* BuildHistoryDatasources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

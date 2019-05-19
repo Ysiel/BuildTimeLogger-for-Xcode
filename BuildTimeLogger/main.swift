@@ -8,25 +8,23 @@
 
 import Foundation
 
-// Need to wait in the beginning, otherwise without that the app is picking the previous build for some reason.
-sleep(1)
+func remoteApiFactory(_ urlString: String) -> BuildHistoryRemoteAPI {
 
-let remoteStorageURL: URL = {
-
-    guard CommandLine.arguments.count > 1 else {
-        return URL(string: "")!
+    guard let url = URL(string: urlString) else {
+        fatalError("incorrect URL")
     }
 
-    return URL(string: CommandLine.arguments[1])!
-}()
+    return FireBaseRestBuildHistoryRemoteApi(remoteStorageURL: url)
+}
+
+sleep(1)    // Need to wait in the beginning, otherwise without that the app is picking the previous build for some reason.
 
 let app = BuildTimeLoggerApp(
     useCase: BuildHistoryUseCase(
+        makeRemoteApi: remoteApiFactory,
         dataStore: UserDefaultBuildHistoryLocalStore(),
-        remoteApi: FireBaseRestBuildHistoryRemoteApi(
-            remoteStorageURL: remoteStorageURL
-        ),
-        builder: XcodeBuilder())
+        builder: XcodeBuilder()
+    )
 )
 
 app.run()

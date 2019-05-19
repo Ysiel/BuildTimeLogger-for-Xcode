@@ -13,15 +13,16 @@ enum NetworkError: Error {
 }
 
 protocol BuildHistoryRemoteAPI {
-    func save(_ entry: BuildHistoryEntry)
+    func save(_ entries: [BuildHistoryEntry])
     func retrieveAllEntries(completion: @escaping (Result<[BuildHistoryEntry], NetworkError>) -> Void)
 }
 
 protocol BuildHistoryLocalStore {
-    func save(entry: BuildHistoryEntry)
+    func save(entries: [BuildHistoryEntry])
     func retrieveAllEntries() -> [BuildHistoryEntry]
+    func retrieveAllEntries(for scheme: String) -> [BuildHistoryEntry]
 }
 
 protocol BuildTool {
-    func retrieveLastBuildHistoryEntry() -> BuildHistoryEntry?
+    func retrieveBuildHistoryEntries(for scheme: String) -> [BuildHistoryEntry]
 }
